@@ -1,4 +1,5 @@
  # -*- coding: utf-8 -*-
+import os
 
 from discord.ext import commands
 from discord import Embed, Forbidden, Game
