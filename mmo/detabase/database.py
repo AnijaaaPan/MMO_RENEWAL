@@ -67,6 +67,7 @@ class Database:
             if boss_hp <= 0: # 敵の残り体力が0未満になった場合 違う場合はelseに...
                 win_message = await win_process(ctx, channel_id, boss_level, monster_name, conn, cur) # 経験値やアイテムなどの処理を行う
                 await ctx.send(f"{attack_message}\n{win_message}" if len(f"{attack_message}\n{win_message}") <= 2000 else "2000文字対策用メッセージ")
+                monster_delete(channel_id)
                 return await Database().reset_battle(ctx, channel_id, conn, cur, level_up=True) # level_upをTrueにしてるから敵の階層が上がるようになる(デフォルトはFalse)
             else:
                 await cur.execute("UPDATE channel_status SET boss_hp=? WHERE channel_id=?", (boss_hp, channel_id)) # 攻撃された敵の体力から差し引いた分の体力をデータベースにて更新
@@ -143,6 +144,7 @@ class Database:
             if boss_hp <= 0: # 敵の残り体力が0未満になった場合 違う場合はelseに...
                 win_message = await win_process(ctx, channel_id, boss_level, monster_name, conn, cur) # 経験値やアイテムなどの処理を行う
                 await ctx.send(f"{attack_message}\n{win_message}" if len(f"{attack_message}\n{win_message}") <= 2000 else "2000文字対策用メッセージ")
+                monster_delete(channel_id)
                 return await Database().reset_battle(ctx, channel_id, conn, cur, level_up=True) # level_upをTrueにしてるから敵の階層が上がるようになる(デフォルトはFalse)
             else:
                 await cur.execute("UPDATE channel_status SET boss_hp=? WHERE channel_id=?", (boss_hp, channel_id)) # 攻撃された敵の体力から差し引いた分の体力をデータベースにて更新
