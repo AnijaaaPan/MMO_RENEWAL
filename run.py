@@ -19,31 +19,32 @@ async def run():
     sqlite_list, on_ready_complete, only_admin, ban_member = [], [], [], []
     bot = MyBot(sqlite_list=sqlite_list, on_ready_complete=on_ready_complete, only_admin=only_admin, ban_member=ban_member)
     try: # ERRORが起きるか起きないか。起きたらexceptに飛ばされる
-        # ./all_data/mmo.dbが存在してない場合は自動的に作成されます。
-        # そして自動的に現段階で必要な環境にします。
-        open(f"./all_data/mmo.db", "w").close() # 存在しない場合は./all_data/mmo.dbが作成される
-        async with connect('./all_data/mmo.db') as conn: # データベースに接続
-            async with conn.cursor() as cur:
-                await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
-                # テーブル名:『player』 カラム内容： ユーザーID 整数型, 経験値 整数型, ボットか否か 整数型
-                await cur.execute("CREATE TABLE IF NOT EXISTS player(user_id BIGINT(20), exp bigint(20), isbot int)")
-                await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
+        if os.path.exists("./all_data/mmo.db"):
+            # ./all_data/mmo.dbが存在してない場合は自動的に作成されます。
+            # そして自動的に現段階で必要な環境にします。
+            open(f"./all_data/mmo.db", "w").close() # 存在しない場合は./all_data/mmo.dbが作成される
+            async with connect('./all_data/mmo.db') as conn: # データベースに接続
+                async with conn.cursor() as cur:
+                    await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
+                    # テーブル名:『player』 カラム内容： ユーザーID 整数型, 経験値 整数型, ボットか否か 整数型
+                    await cur.execute("CREATE TABLE IF NOT EXISTS player(user_id BIGINT(20), exp bigint(20), isbot int)")
+                    await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
 
-                # テーブル名:『item』 カラム内容： ユーザーID 整数型, アイテムID　整数値, 個数 整数値
-                await cur.execute("CREATE TABLE IF NOT EXISTS item(user_id BIGINT(20), item_id INT, count INT)")
-                await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
+                    # テーブル名:『item』 カラム内容： ユーザーID 整数型, アイテムID　整数値, 個数 整数値
+                    await cur.execute("CREATE TABLE IF NOT EXISTS item(user_id BIGINT(20), item_id INT, count INT)")
+                    await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
 
-                # テーブル名:『ban_user』 カラム内容： ユーザーID 整数型
-                await cur.execute("CREATE TABLE IF NOT EXISTS ban_user(user_id BIGINT(20))")
-                await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
+                    # テーブル名:『ban_user』 カラム内容： ユーザーID 整数型
+                    await cur.execute("CREATE TABLE IF NOT EXISTS ban_user(user_id BIGINT(20))")
+                    await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
 
-                # テーブル名:『in_battle』 カラム内容： ユーザーID 整数型, チャンネルID 整数型, 自分の体力 整数型
-                await cur.execute("CREATE TABLE IF NOT EXISTS in_battle(user_id BIGINT(20), channel_id BIGINT(20), player_hp INT)")
-                await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
+                    # テーブル名:『in_battle』 カラム内容： ユーザーID 整数型, チャンネルID 整数型, 自分の体力 整数型
+                    await cur.execute("CREATE TABLE IF NOT EXISTS in_battle(user_id BIGINT(20), channel_id BIGINT(20), player_hp INT)")
+                    await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
 
-                # テーブル名:『channel_status』 カラム内容： サーバーID 整数型 , チャンネルID 整数型 , 敵のレベル 整数型 , 敵の体力 整数型
-                await cur.execute("CREATE TABLE IF NOT EXISTS channel_status(server_id bigint(20), channel_id BIGINT(20), boss_level INT, boss_hp INT)")
-                await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
+                    # テーブル名:『channel_status』 カラム内容： サーバーID 整数型 , チャンネルID 整数型 , 敵のレベル 整数型 , 敵の体力 整数型
+                    await cur.execute("CREATE TABLE IF NOT EXISTS channel_status(server_id bigint(20), channel_id BIGINT(20), boss_level INT, boss_hp INT)")
+                    await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
 
         try: # ERRORが起きるか起きないか。起きたらexceptに飛ばされる
             await bot.start(token) # BOTを起動させる
