@@ -39,7 +39,7 @@ def monster_info(channel_id): # モンスターの名前、画像、ランクを
         N_monster[channel_id] = monsters
         monster_name = monsters["name"] # モンスターの名前を取得
         monster_image = monsters["img"] # モンスターの画像を取得
-        monster_rank = monsters[channel_id]["rank"] # モンスターのランクを取得
+        monster_rank = monsters["rank"] # モンスターのランクを取得
     return monster_name, monster_image, monster_rank
 
 def monster_delete(channel_id): # そのチャンネルに存在してる敵の情報を全て削除

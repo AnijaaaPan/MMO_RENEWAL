@@ -1,3 +1,17 @@
+# 動作環境(編集段階2020/04/05)
+| パッケージ等 | version |  |パッケージ等 | version | 
+|:-----------|:------------:| ------------ |:-----------|:------------:| 
+| "Python" | 3.7.4 | | "discord.py" | 1.3.3 |
+| "yarl" | 1.4.2 | | "chardet" | 3.0.4 |
+| "websockets" | 8.1 | | "attrs" | 19.3.0 |
+| "pip" | 20.0.2 | | "async-timeout" | 3.0.1 |
+| "multidict" | 4.7.5 | | "aiosqlite" | 0.11.0 |
+| "idna" | 2.9 | | "aiohttp" | 3.6.2 |
+```markdown
+書き方はdiscord.pyのrewriteでcogsを使用しています。
+cogsとは: "https://qiita.com/kymybk/items/14d5d10f33315c8a9aee"
+```
+
 # このリニューアルコードについて:
 ```
 どうもDiscordで兄じゃぁぁぁ#3454という名前で活動している一般ユーザーです。
@@ -27,7 +41,7 @@ ERRORが出たBOTでERRORを再現するために
 admin_list = [304932786286886912] # ここね 
 ```
 
-# 使えるコマンド集:(運営のも含めて) ~~の部分はprefix
+#使えるコマンド集:(運営のも含めて) ~~の部分はprefix
 ```markdown
 一般ユーザーが使用できるコマンド集:
 ```
@@ -54,7 +68,7 @@ admin_list = [304932786286886912] # ここね
 | ~~ban | 指定したユーザーをBANする (おまけで追加) |
 | ~~unban | 指定したユーザーのBANを解除する (おまけで追加) |
 
-# データベースの中身:
+#データベースの中身:
 | テーブル名:  | カラム名: | カラムの型: |  テーブル名:  | カラム名: | カラムの型: | 
 |:-----------|:------------|:------------:|:-----------|:------------|:------------:|
 | "player" | user_id | BIGINT(20) | "in_battle" | user_id | BIGINT(20) |
@@ -67,7 +81,7 @@ admin_list = [304932786286886912] # ここね
 |  |  |  |  | boss_hp | INT |
 | "ban_user" | user_id | BIGINT(20) | | | |
 
-# 今回対策してるバグ集:
+#今回対策してるバグ集:
 | バグ内容: | そしてその対策: |
 |:-----------:|:------------|
 | "権限不足" | commands.bot_has_permissionsを使用しあらかじめ権限がないと使用不可に |
@@ -77,7 +91,7 @@ admin_list = [304932786286886912] # ここね
 | "全ての関数にtraceback" | traceback安定で有能すぎますね。ERROR読める人は詳しいところまで頑張ってください！ |
 | "データベース接続過多" | 非同期にさせてるしon_messageで接続し全処理をその1回の接続で済ませるように工夫 |
 
-# やろうと思ったけどやめたやつ:
+#やろうと思ったけどやめたやつ:
 | 内容: | 理由: |
 |:-----------:|:------------|
 | "self対策" | 公開したらTAOのやつが対策されるから。怖い；；ぴえん |
@@ -86,7 +100,7 @@ admin_list = [304932786286886912] # ここね
 | "ログインしたときのメッセージ" | printで充分でしょ |
 | "午前0時に全ファイルを自動zip化" | 最初はこのコード読み解くのに時間かかるしそんなに必要としないと思うから |
 
-# 最後に:
+#最後に:
 ```markdown
 自分はMMOくんのおかげでDiscordを続けてこれたし
 MMOくんのおかげでプログラミングをここまで続ける事ができる。
@@ -105,3 +119,21 @@ TAO-Discord鯖: https://discord.gg/tao
 TAOの招待: https://discordapp.com/api/oauth2/authorize?client_id=526620171658330112&permissions=3533888&scope=bot
 TAOの寄付も募ってる(欲張り): https://taqooto.wixsite.com/tao-donate
 ```
+
+# 追記:(修正や追加した事などをメインに書きます。)
+| 修正や追加した場所 | 一言 | 修正or追加日 |
+|:-----------:|:------------|:-----------:|
+| "ERRORにクールタイム対応" | ただ単に編集忘れです。 | 2020/04/05 |
+| "monster_info関数の修正" | else:のところがミスを起こしてました。確認不足でした。 | 2020/04/05 |
+| "動作環境の記入不足" | 別環境で動作ERROR起きたら萎えちゃうかも～^^ | 2020/04/05 |
+
+# ERRORや分からないところがあった際の連絡先:
+| 連絡先 | ここからDMとかよろしく | | 
+|:-----------|:------------|:------------|
+| "Twitter" | https://twitter.com/Anijaaatakoyaki | https://twitter.com/Discord_TAO |
+| "Discord" | User: 兄じゃぁぁぁ#3454 | ID: 304932786286886912 |
+| "メイン鯖" | https://discord.gg/tao | |
+| "Instagram" | https://www.instagram.com/tiku_taku.py/?hl=ja | |
+| "Github" | https://github.com/Anijaaaaaaaaaaa | |
+| "Line" | OpenChat: | https://line.me/ti/g2/XNsUYGr-ZcJjEnfK-ALElw |
+|  | LineID: | yawarakasensha1234 |

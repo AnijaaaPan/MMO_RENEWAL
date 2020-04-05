@@ -127,10 +127,10 @@ class MyBot(commands.Bot):
         try: # ERRORが起きるか起きないか。起きたらexceptに飛ばされる
             # コマンドが存在してない場合
             if isinstance(e, commands.CommandNotFound):
-                return await ctx.send(embed=Embed(description=f"そのコマンドは存在しいません。").set_author(name=f"『{ctx.guild.name}』での{self.user}の必要な権限:"))
+                return await ctx.send(embed=Embed(description=f"そのコマンドは存在しません。"))
             # @commands.bot_has_permissions(read_messages=True, send_messages=True, embed_links=True, add_reactions=True, manage_messages=True, read_message_history=True)
             # コマンドの場所で上記のように書かれてると思いますがBOTにその権限が無い場合にこのERRORになります。
-            if isinstance(e, commands.BotMissingPermissions):
+            elif isinstance(e, commands.BotMissingPermissions):
                 permission = {'read_messages': "メッセージを読む", 'send_messages': "メッセージを送信", 'read_message_history': "メッセージ履歴を読む", 'manage_messages': "メッセージの管理", 'embed_links': "埋め込みリンク", 'add_reactions': "リアクションの追加"}
                 text = ""
                 for all_error_permission in e.missing_perms: # 大丈夫ではない権限を判断
@@ -142,6 +142,10 @@ class MyBot(commands.Bot):
                     await ctx.author.send(embed=Embed(description=text).set_author(name=f"『{ctx.guild.name}』での{self.user}の必要な権限:")) # ユーザーのDMに送る。しかし送れる権限がない場合は何もなかったことにされる^^
                 except Exception:
                     return
+            elif isinstance(e, commands.CommandOnCooldown):
+                return await ctx.send(embed=Embed(description="まだこのコマンドのクールタイムは終わってません！\n`{:.2f}`秒後にまたお願いします！".format(e.retry_after)))
+            else:
+                raise e
 
         except Forbidden:
             return
