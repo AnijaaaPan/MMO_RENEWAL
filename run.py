@@ -20,7 +20,7 @@ async def run():
     sqlite_list, on_ready_complete, only_admin, ban_member = [], [], [], []
     bot = MyBot(sqlite_list=sqlite_list, on_ready_complete=on_ready_complete, only_admin=only_admin, ban_member=ban_member)
     try: # ERRORが起きるか起きないか。起きたらexceptに飛ばされる
-        if os.path.exists("./all_data/mmo.db"):
+        if not os.path.exists("./all_data/mmo.db"):
             # ./all_data/mmo.dbが存在してない場合は自動的に作成されます。
             # そして自動的に現段階で必要な環境にします。
             open(f"./all_data/mmo.db", "w").close() # 存在しない場合は./all_data/mmo.dbが作成される
