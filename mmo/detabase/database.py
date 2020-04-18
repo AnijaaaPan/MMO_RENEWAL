@@ -67,7 +67,6 @@ class Database:
             if boss_hp <= 0: # 敵の残り体力が0未満になった場合 違う場合はelseに...
                 win_message = await win_process(ctx, channel_id, boss_level, monster_name, conn, cur) # 経験値やアイテムなどの処理を行う
                 await ctx.send(f"{attack_message}\n{win_message}" if len(f"{attack_message}\n{win_message}") <= 2000 else "2000文字対策用メッセージ")
-                monster_delete(channel_id)
                 return await Database().reset_battle(ctx, channel_id, conn, cur, level_up=True) # level_upをTrueにしてるから敵の階層が上がるようになる(デフォルトはFalse)
             else:
                 await cur.execute("UPDATE channel_status SET boss_hp=? WHERE channel_id=?", (boss_hp, channel_id)) # 攻撃された敵の体力から差し引いた分の体力をデータベースにて更新
@@ -144,7 +143,6 @@ class Database:
             if boss_hp <= 0: # 敵の残り体力が0未満になった場合 違う場合はelseに...
                 win_message = await win_process(ctx, channel_id, boss_level, monster_name, conn, cur) # 経験値やアイテムなどの処理を行う
                 await ctx.send(f"{attack_message}\n{win_message}" if len(f"{attack_message}\n{win_message}") <= 2000 else "2000文字対策用メッセージ")
-                monster_delete(channel_id)
                 return await Database().reset_battle(ctx, channel_id, conn, cur, level_up=True) # level_upをTrueにしてるから敵の階層が上がるようになる(デフォルトはFalse)
             else:
                 await cur.execute("UPDATE channel_status SET boss_hp=? WHERE channel_id=?", (boss_hp, channel_id)) # 攻撃された敵の体力から差し引いた分の体力をデータベースにて更新
@@ -166,16 +164,18 @@ class Database:
 
             boss_level, boss_hp = await get_boss_level_and_hp(ctx.guild.id, channel_id, conn, cur) # チャンネルの敵のレベルと現在の体力を返す
             if level_up: # 敵を倒した
+                monster_delete(channel_id)  # モンスター情報をそのチャンネルから削除
+                
                 await cur.execute("UPDATE channel_status SET boss_level=boss_level+1 WHERE channel_id=?;", (channel_id,)) # チャンネルの敵のレベルの情報を1上げる
                 await conn.commit() # データベースを最新の情報にするために更新する。 絶対必須
 
-              # 50階層ごとに超強敵 5階層ごとに強敵出したい場合はこうします。 その場合は[if random.random() <= 0.1:]を[elif random.random() <= 0.1:]にしてね
-              # if boss_level % 50 == 0:
-              #    monster = random.choice(supertuyoi_monster)
-              #    SST_monster[channel_id] = monster
-              # elif boss_level % 5 == 0:
-              #    monster = random.choice(tuyoi_monster)
-              #    ST_monster[channel_id] = monster
+                # 50階層ごとに超強敵 5階層ごとに強敵出したい場合はこうします。 その場合は[if random.random() <= 0.1:]を[elif random.random() <= 0.1:]にしてね
+                # if boss_level % 50 == 0:
+                #    monster = random.choice(supertuyoi_monster)
+                #    SST_monster[channel_id] = monster
+                # elif boss_level % 5 == 0:
+                #    monster = random.choice(tuyoi_monster)
+                #    ST_monster[channel_id] = monster
 
                 if random.random() <= 0.1: # 10分の1でレアモンスターになる
                     monster = random.choice(rera_monster) # レア敵の中からランダムで敵を取得
@@ -247,8 +247,8 @@ async def win_process(ctx, channel_id, exp, monster_name, conn, cur): # 敵を�
         for member_id in [m[0] for m in await cur.fetchall()]:
             level_up_comments.append(await experiment(ctx, member_id, exp, conn, cur)) # レベルが上がったかどうかの判定 上がった場合はメッセージが返ってきて上がってない場合は空のメッセージが返ってくる
             members += "<@{}> ".format(member_id) # 経験値をゲットしたメンバーをメッセージに追加
-          # 今回取得した経験値を2乗しそれに0.02をかけてその状態から自分の総合計経験値数を割る
-          # 上記の状態と0.1のどっちの数字の方が少ないかを取得
+            # 今回取得した経験値を2乗しそれに0.02をかけてその状態から自分の総合計経験値数を割る
+            # 上記の状態と0.1のどっちの数字の方が少ないかを取得
             p = min((0.02*(exp**2)) / await get_player_exp(ctx, member_id, conn, cur), 0.1)
             if exp % 50 == 0 and random.random() < p: # 倒した敵のレベルが50の倍数だった場合かrandom.random()で生成した乱数よりpの確率の方が上だった場合
                 elixir_members += "<@{}> ".format(member_id) # アイテムをゲットしたメンバーをメッセージに追加
