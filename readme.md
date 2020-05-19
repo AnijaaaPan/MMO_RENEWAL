@@ -10,14 +10,14 @@
 
 ```markdown
 書き方はdiscord.pyのrewriteでcogsを使用しています。
-cogsとは: [`discord.py(Rewrite版)のCogを使ってみる`](https://qiita.com/kymybk/items/14d5d10f33315c8a9aee)
+cogsとは: https://qiita.com/kymybk/items/14d5d10f33315c8a9aee
 ```
 # このリニューアルコードについて:
 ```
 どうもDiscordで兄じゃぁぁぁ#3454という名前で活動している一般ユーザーです。
 今回はかなりお世話になってるMMOくんのコードを書き直したのでそれを公開します。
 
-MMOくんのコード: [MMOくんの原型コード](https://github.com/dischanet/mmo-discord-bot)
+MMOくんのコード: https://github.com/dischanet/mmo-discord-bot
 このコードの基盤はMMOくんでありそこからTAOの中身をいくつか持ってきたものです。
 かなりコメントアウトをしていますが何故かというと
 前にオープンソース化されたMMOくんの中身は
@@ -115,9 +115,9 @@ TAOの皆のおかげでもあるけどやっぱり原点は頂点だね。本�
 兄じゃぁぁぁ#3454でDiscordが消えるまで活動(現在は受験のためお休み中)してるはずやからいくらでもDMしてや！
 
 あとTAOってBOTもよろしくね！自分はこっちをメインに活動してるからさ！
-TAO-Discord鯖: [TAO-Discord鯖](https://discord.gg/tao)
-TAOの招待: [TAOの招待](https://discordapp.com/api/oauth2/authorize?client_id=526620171658330112&permissions=3533888&scope=bot)
-TAOの寄付も募ってる(欲張り): [TAOの寄付も募ってる(欲張り)](https://taqooto.wixsite.com/tao-donate)
+TAO-Discord鯖: https://discord.gg/tao
+TAOの招待: https://discordapp.com/api/oauth2/authorize?client_id=526620171658330112&permissions=3533888&scope=bot
+TAOの寄付も募ってる(欲張り): https://taqooto.wixsite.com/tao-donate
 ```
 
 # 追記:(修正や追加した事などをメインに書きます。)
