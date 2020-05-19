@@ -135,5 +135,5 @@ TAOの寄付も募ってる(欲張り): https://taqooto.wixsite.com/tao-donate
 |:-----------|:------------|:------------|
 | "Twitter" | https://twitter.com/Anijaaatakoyaki | https://twitter.com/Discord_TAO |
 | "Discord" | User: 兄じゃぁぁぁ#3454 | ID: 304932786286886912 |
-| "メイン鯖" | https://discord.gg/tao | |
+| | "メイン鯖":https://discord.gg/tao | |
 | "Github" | https://github.com/Anijaaaaaaaaaaa | |
