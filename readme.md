@@ -10,9 +10,8 @@
 
 ```markdown
 書き方はdiscord.pyのrewriteでcogsを使用しています。
-cogsとは: [discord.py(Rewrite版)のCogを使ってみる][1]
+cogsとは: [`discord.py(Rewrite版)のCogを使ってみる`](https://qiita.com/kymybk/items/14d5d10f33315c8a9aee)
 ```
-[1]:https://qiita.com/kymybk/items/14d5d10f33315c8a9aee
 # このリニューアルコードについて:
 ```
 どうもDiscordで兄じゃぁぁぁ#3454という名前で活動している一般ユーザーです。
