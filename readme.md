@@ -9,7 +9,7 @@
 | "idna" | 2.9 | | "aiohttp" | 3.6.2 |
 ```markdown
 書き方はdiscord.pyのrewriteでcogsを使用しています。
-cogsとは: [discord.py(Rewrite版)のCogを使ってみる] # https://qiita.com/kymybk/items/14d5d10f33315c8a9aee
+cogsとは: [discord.py(Rewrite版)のCogを使ってみる]:https://qiita.com/kymybk/items/14d5d10f33315c8a9aee
 ```
 
 # このリニューアルコードについて:
