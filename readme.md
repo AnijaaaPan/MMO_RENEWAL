@@ -17,7 +17,7 @@ cogsとは: [discord.py(Rewrite版)のCogを使ってみる](https://qiita.com/k
 どうもDiscordで兄じゃぁぁぁ#3454という名前で活動している一般ユーザーです。
 今回はかなりお世話になってるMMOくんのコードを書き直したのでそれを公開します。
 
-MMOくんのコード:[MMOくんの原型コード](https://github.com/dischanet/mmo-discord-bot)
+MMOくんのコード: [MMOくんの原型コード](https://github.com/dischanet/mmo-discord-bot)
 このコードの基盤はMMOくんでありそこからTAOの中身をいくつか持ってきたものです。
 かなりコメントアウトをしていますが何故かというと
 前にオープンソース化されたMMOくんの中身は
