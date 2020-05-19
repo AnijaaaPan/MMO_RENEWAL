@@ -7,12 +7,12 @@
 | "pip" | 20.0.2 | | "async-timeout" | 3.0.1 |
 | "multidict" | 4.7.5 | | "aiosqlite" | 0.11.0 |
 | "idna" | 2.9 | | "aiohttp" | 3.6.2 |
-[discord.py(Rewrite版)のCogを使ってみる](https://qiita.com/kymybk/items/14d5d10f33315c8a9aee)
+
 ```markdown
 書き方はdiscord.pyのrewriteでcogsを使用しています。
-cogsとは: [discord.py(Rewrite版)のCogを使ってみる](https://qiita.com/kymybk/items/14d5d10f33315c8a9aee)
+cogsとは: [discord.py(Rewrite版)のCogを使ってみる][1]
 ```
-
+[1]:https://qiita.com/kymybk/items/14d5d10f33315c8a9aee
 # このリニューアルコードについて:
 ```
 どうもDiscordで兄じゃぁぁぁ#3454という名前で活動している一般ユーザーです。
